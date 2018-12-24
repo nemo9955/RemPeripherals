@@ -17,7 +17,7 @@ class BuzzerAct : public Actuator
 
   private:
     const uint8_t BuzzerAct_PIN;
-    uint32_t act_state = 0;
+    uint32_t act_state ;
     int freq[8];
     String note[8];
 };

@@ -3,9 +3,10 @@
 uint8_t CycleSwitch::used_cbs = 0;
 CycleSwitch *CycleSwitch::list_obj[8];
 
-CycleSwitch::CycleSwitch(uint8_t pb, uint32_t cycle, uint16_t wait_change)
+CycleSwitch::CycleSwitch(uint8_t pb, uint32_t cycle, uint16_t step, uint16_t wait_change)
     : PIN_BUTTON(pb),
       cycle_size(cycle),
+      cycle_step(step),
       TOG_SWITCH_MIN_DURATION(wait_change)
 {
     cb_index = used_cbs++;
@@ -76,9 +77,10 @@ void CycleSwitch::update()
 void CycleSwitch::advanceState()
 {
 
-    switch_state++;
-    if (switch_state >= cycle_size)
-        switch_state = 0;
+    switch_state += cycle_step;
+    switch_state %= cycle_size;
+    // if (switch_state >= cycle_size)
+    //     switch_state = 0;
     Serial.printf("CycleSwitch %u state : %u \n", cb_index, switch_state);
 
     callListeners();

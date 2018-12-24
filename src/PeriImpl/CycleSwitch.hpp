@@ -12,7 +12,7 @@ typedef void (*CycleFunctionCb)(uint32_t state);
 class CycleSwitch : public Switcher
 {
   public:
-    CycleSwitch(uint8_t pb, uint32_t cycle = 2, uint16_t wait_change = 2000);
+    CycleSwitch(uint8_t pb, uint32_t cycle = 2, uint16_t step = 1, uint16_t wait_change = 2000);
     ~CycleSwitch();
 
     void update();
@@ -28,6 +28,7 @@ class CycleSwitch : public Switcher
   private:
     uint16_t switch_state;
     const uint32_t cycle_size;
+    const uint16_t cycle_step;
     const uint16_t TOG_SWITCH_MIN_DURATION;
 
     CycleFunctionCb func_cb ;
