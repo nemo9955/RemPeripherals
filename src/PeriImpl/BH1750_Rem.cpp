@@ -18,6 +18,7 @@ void BH1750_Rem::sensorRead()
 {
     ambient_lux = lightMeter.readLightLevel();
 }
+
 void BH1750_Rem::sensorPrint()
 {
 

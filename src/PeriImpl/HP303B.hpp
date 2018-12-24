@@ -22,10 +22,8 @@ class HP303B : public Sensor
     void sensorRead();
     void sensorPrint();
 
-    char *getPerName() const
-    {
-        return type_str;
-    };
+    char *getPerName() const { return type_str; };
+
 
   private:
     char *type_str;

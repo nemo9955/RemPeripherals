@@ -32,8 +32,8 @@ class DHTxx_I2C : public Sensor
 
     char *type_str;
 
-    float _cTemp;
     float _fTemp;
+    float _cTemp;
     float _humidity;
 };
 

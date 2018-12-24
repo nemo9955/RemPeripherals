@@ -3,11 +3,13 @@
         "*.tmpl": "go",
         "Dockerfile-armv7l": "dockerfile",
         "Dockerfile-x86_64": "dockerfile",
+        "*.pde": "cpp",
         "*.tcc": "cpp",
         "array": "cpp",
         "functional": "cpp",
         "istream": "cpp",
         "tuple": "cpp",
-        "utility": "cpp"
+        "utility": "cpp",
+        "condition_variable": "cpp"
     }
 }

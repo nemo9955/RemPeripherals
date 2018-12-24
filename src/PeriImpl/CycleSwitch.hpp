@@ -1,11 +1,9 @@
-
 #ifndef CYCLESWITCH_HPP_
 #define CYCLESWITCH_HPP_
 
 #include "Actuator.h"
 #include "Switcher.h"
 #include <Arduino.h>
-
 
 typedef void (*CycleFunctionCb)(uint32_t state);
 
@@ -22,8 +20,7 @@ class CycleSwitch : public Switcher
 
     void attachFunction(CycleFunctionCb sfcb);
     void attachActuator(Actuator *);
-    Actuator *getActuator();
-
+    Actuator *getActuator() { return THE_ACTUATOR; };
 
   private:
     uint16_t switch_state;
@@ -31,7 +28,7 @@ class CycleSwitch : public Switcher
     const uint16_t cycle_step;
     const uint16_t TOG_SWITCH_MIN_DURATION;
 
-    CycleFunctionCb func_cb ;
+    CycleFunctionCb func_cb;
 
     Actuator *THE_ACTUATOR;
     const uint8_t PIN_BUTTON;

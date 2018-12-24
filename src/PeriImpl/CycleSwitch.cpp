@@ -113,5 +113,3 @@ void CycleSwitch::attachActuator(Actuator *act)
     Serial.println("added ACTUATOR  !!!!!!!   ");
     callListeners();
 }
-
-Actuator *CycleSwitch::getActuator() { return THE_ACTUATOR; }
