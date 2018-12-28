@@ -46,14 +46,14 @@ void setup()
 
 void loop()
 {
-    // press_sens.sensorRead();
-    // press_sens.sensorPrint();
-    // lux_sens.sensorRead();
-    // lux_sens.sensorPrint();
-    // sht_sens.sensorRead();
-    // sht_sens.sensorPrint();
-    // dhtxx_i2c.sensorRead();
-    // dhtxx_i2c.sensorPrint();
+    // press_sens.read_values();
+    // press_sens.print_info(&Serial);
+    // lux_sens.read_values();
+    // lux_sens.print_info(&Serial);
+    // sht_sens.read_values();
+    // sht_sens.print_info(&Serial);
+    // dhtxx_i2c.read_values();
+    // dhtxx_i2c.print_info(&Serial);
 
     btn1.update();
 

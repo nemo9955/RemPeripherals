@@ -1,25 +1,31 @@
 #include "Servo_Rem.hpp"
 
 Servo_Rem::Servo_Rem(uint8_t pin_)
-    : myservo(),
-      Servo_Rem_PIN(pin_),
-      act_state(0)
+    : servo_obj(),
+      device_pin(pin_),
+      actor_state(0)
 {
 }
 
 void Servo_Rem::begin()
 {
-    myservo.attach(Servo_Rem_PIN);
+    servo_obj.attach(device_pin);
+}
 
-    Serial.printf("Servo_Rem BEGIN on pin : %u \n", Servo_Rem_PIN);
+void Servo_Rem::update()
+{
 }
 
 bool Servo_Rem::setState(uint32_t state)
 {
 
-    act_state = state;
-    myservo.write(act_state);
+    actor_state = state;
+    servo_obj.write(actor_state);
 
-    Serial.printf("Servo_Rem state : %u \n", act_state);
+    Serial.printf("Servo_Rem state : %u \n", actor_state);
     return true;
+}
+
+void Servo_Rem::print_info(Print *pr)
+{
 }

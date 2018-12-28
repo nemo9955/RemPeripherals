@@ -10,6 +10,14 @@
         "istream": "cpp",
         "tuple": "cpp",
         "utility": "cpp",
-        "condition_variable": "cpp"
+        "condition_variable": "cpp",
+        "deque": "cpp",
+        "list": "cpp",
+        "unordered_map": "cpp",
+        "vector": "cpp",
+        "initializer_list": "cpp",
+        "*.ini": "cpp",
+        "*.cfg": "cpp",
+        "*.gitmodules": "cpp"
     }
 }

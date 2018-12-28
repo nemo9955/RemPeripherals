@@ -2,9 +2,11 @@
 #define Analog_sensor_H
 
 // #include <stdint.h>
-#include "Sensor.h"
+#include "Sensor.hpp"
+#include "Updater.hpp"
+#include "RemPrinter.hpp"
 
-class Analog_sensor : public Sensor
+class Analog_sensor : public Sensor, public Updater, public RemPrinter
 {
   public:
     Analog_sensor(uint8_t pin_, char *sensName, char *readName,
@@ -13,12 +15,13 @@ class Analog_sensor : public Sensor
     ~Analog_sensor();
 
     void begin();
-    void sensorRead();
-    void sensorPrint();
+    void update();
+    void read_values();
+    void print_info(Print * pr);
 
   private:
-    const uint8_t Analog_sensor_PIN;
-    char *sensorName;
+    const uint8_t device_pin;
+    char *sensor_name;
     char *reading_name;
     const int32_t min_map, max_map;
     int32_t sens_value;

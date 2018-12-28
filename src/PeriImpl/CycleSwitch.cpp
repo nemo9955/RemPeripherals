@@ -4,7 +4,7 @@ uint8_t CycleSwitch::used_cbs = 0;
 CycleSwitch *CycleSwitch::list_obj[8];
 
 CycleSwitch::CycleSwitch(uint8_t pb, uint32_t cycle, uint16_t step, uint16_t wait_change)
-    : PIN_BUTTON(pb),
+    : device_pin(pb),
       cycle_size(cycle),
       cycle_step(step),
       TOG_SWITCH_MIN_DURATION(wait_change)
@@ -20,33 +20,33 @@ CycleSwitch::~CycleSwitch()
 
 void CycleSwitch::begin()
 {
-    pinMode(PIN_BUTTON, INPUT);
+    pinMode(device_pin, INPUT);
 
     switch (cb_index)
     {
     case 0:
-        attachInterrupt(digitalPinToInterrupt(PIN_BUTTON), cb_func_0, RISING);
+        attachInterrupt(digitalPinToInterrupt(device_pin), cb_func_0, RISING);
         break;
     case 1:
-        attachInterrupt(digitalPinToInterrupt(PIN_BUTTON), cb_func_1, RISING);
+        attachInterrupt(digitalPinToInterrupt(device_pin), cb_func_1, RISING);
         break;
     case 2:
-        attachInterrupt(digitalPinToInterrupt(PIN_BUTTON), cb_func_2, RISING);
+        attachInterrupt(digitalPinToInterrupt(device_pin), cb_func_2, RISING);
         break;
     case 3:
-        attachInterrupt(digitalPinToInterrupt(PIN_BUTTON), cb_func_3, RISING);
+        attachInterrupt(digitalPinToInterrupt(device_pin), cb_func_3, RISING);
         break;
     case 4:
-        attachInterrupt(digitalPinToInterrupt(PIN_BUTTON), cb_func_4, RISING);
+        attachInterrupt(digitalPinToInterrupt(device_pin), cb_func_4, RISING);
         break;
     case 5:
-        attachInterrupt(digitalPinToInterrupt(PIN_BUTTON), cb_func_5, RISING);
+        attachInterrupt(digitalPinToInterrupt(device_pin), cb_func_5, RISING);
         break;
     case 6:
-        attachInterrupt(digitalPinToInterrupt(PIN_BUTTON), cb_func_6, RISING);
+        attachInterrupt(digitalPinToInterrupt(device_pin), cb_func_6, RISING);
         break;
     case 7:
-        attachInterrupt(digitalPinToInterrupt(PIN_BUTTON), cb_func_7, RISING);
+        attachInterrupt(digitalPinToInterrupt(device_pin), cb_func_7, RISING);
         break;
 
     default:
@@ -56,7 +56,7 @@ void CycleSwitch::begin()
     LAST_MILLS_TOSW = millis();
 
     Serial.printf("CycleSwitch index : %u \n", cb_index);
-    Serial.printf("CycleSwitch pin   : %u \n", PIN_BUTTON);
+    Serial.printf("CycleSwitch pin   : %u \n", device_pin);
 }
 
 void CycleSwitch::update()
@@ -94,9 +94,9 @@ void CycleSwitch::callListeners()
         func_cb(switch_state);
     }
 
-    if (THE_ACTUATOR)
+    if (actuator_obj)
     {
-        THE_ACTUATOR->setState(switch_state);
+        actuator_obj->setState(switch_state);
     }
 }
 
@@ -109,7 +109,7 @@ void CycleSwitch::attachFunction(CycleFunctionCb sfcb)
 
 void CycleSwitch::attachActuator(Actuator *act)
 {
-    THE_ACTUATOR = act;
+    actuator_obj = act;
     Serial.println("added ACTUATOR  !!!!!!!   ");
     callListeners();
 }

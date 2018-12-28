@@ -31,12 +31,12 @@ void setup()
 
 void loop()
 {
-    dhtxx_2wire.sensorRead();
-    dhtxx_2wire.sensorPrint();
-    ds18b20.sensorRead();
-    ds18b20.sensorPrint();
-    bmp180.sensorRead();
-    bmp180.sensorPrint();
+    dhtxx_2wire.read_values();
+    dhtxx_2wire.print_info(&Serial);
+    ds18b20.read_values();
+    ds18b20.print_info(&Serial);
+    bmp180.read_values();
+    bmp180.print_info(&Serial);
 
     Serial.println();
     delay(3000);

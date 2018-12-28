@@ -1,13 +1,14 @@
 #ifndef CYCLESWITCH_HPP_
 #define CYCLESWITCH_HPP_
 
-#include "Actuator.h"
-#include "Switcher.h"
+#include "Actuator.hpp"
+#include "Switcher.hpp"
 #include <Arduino.h>
+#include "Updater.hpp"
 
 typedef void (*CycleFunctionCb)(uint32_t state);
 
-class CycleSwitch : public Switcher
+class CycleSwitch : public Switcher, public Updater
 {
   public:
     CycleSwitch(uint8_t pb, uint32_t cycle = 2, uint16_t step = 1, uint16_t wait_change = 2000);
@@ -20,7 +21,7 @@ class CycleSwitch : public Switcher
 
     void attachFunction(CycleFunctionCb sfcb);
     void attachActuator(Actuator *);
-    Actuator *getActuator() { return THE_ACTUATOR; };
+    Actuator *getActuator() { return actuator_obj; };
 
   private:
     uint16_t switch_state;
@@ -30,8 +31,8 @@ class CycleSwitch : public Switcher
 
     CycleFunctionCb func_cb;
 
-    Actuator *THE_ACTUATOR;
-    const uint8_t PIN_BUTTON;
+    Actuator *actuator_obj;
+    const uint8_t device_pin;
     int LAST_MILLS_TOSW;
     bool INTERRUPT_CALLED_TOGS;
 

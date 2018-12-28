@@ -1,25 +1,42 @@
 #include "Analog_sensor.hpp"
 
-#include <Arduino.h>
-
-uint32_t SUM_AN = 0;
-uint16_t CNT_AN = 0;
-uint32_t dump = 0;
+#include "Arduino.h"
 
 Analog_sensor::Analog_sensor(uint8_t pin_, char *sensName, char *readName,
                              int32_t minmap, int32_t maxmap)
-    : Analog_sensor_PIN(pin_),
-      sensorName(sensName),
+    : device_pin(pin_),
+      sensor_name(sensName),
       reading_name(readName),
       min_map(minmap),
-      max_map(maxmap) {}
-
-void Analog_sensor::sensorRead()
+      max_map(maxmap)
 {
-    dump = map(analogRead(Analog_sensor_PIN), 0, 1023, min_map, max_map);
+
+    sens_value = 0;
 }
 
-void Analog_sensor::sensorPrint()
+void Analog_sensor::read_values()
 {
-    Serial.printf("Analog_sensor %s %s : %i \n", sensorName, reading_name, sens_value);
+    sens_value = map(analogRead(device_pin), 0, 1023, min_map, max_map);
+}
+
+void Analog_sensor::begin()
+{
+}
+
+void Analog_sensor::update()
+{
+}
+
+void Analog_sensor::print_info(Print * pr)
+{
+
+    pr->print("Analog_sensor, ");
+    pr->print(sensor_name);
+    pr->println(" :");
+    pr->print("  ");
+    pr->print(reading_name);
+    pr->print(" ");
+    pr->print(sens_value);
+    pr->println();
+
 }

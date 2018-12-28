@@ -15,8 +15,8 @@ void setup()
 
 void loop()
 {
-    dhtxx_i2c.sensorRead();
-    dhtxx_i2c.sensorPrint();
+    dhtxx_i2c.read_values();
+    dhtxx_i2c.print_info(&Serial);
 
     Serial.println();
     delay(1000);

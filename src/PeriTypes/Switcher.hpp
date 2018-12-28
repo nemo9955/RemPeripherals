@@ -1,9 +1,7 @@
 #ifndef SWITCHER_H
 #define SWITCHER_H
 
-#include "Actuator.h"
-// #include "CONSTANTS.h"
-
+#include <stdint.h>
 
 class Switcher
 {
@@ -15,7 +13,7 @@ class Switcher
     virtual void update() = 0;
 
     virtual void attachActuator(Actuator *) = 0;
-    Actuator *getActuator();
+    virtual Actuator *getActuator() = 0;
 };
 
 #endif

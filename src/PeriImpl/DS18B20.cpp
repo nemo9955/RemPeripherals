@@ -1,25 +1,32 @@
 #include "DS18B20.hpp"
 
 DS18B20::DS18B20(uint8_t pin)
-    : oneWire(pin),
-      sensors(&oneWire)
+    : onewire_obj(pin),
+      dallas_obj(&onewire_obj)
 {
-    type_str = "DS18B20";
+    sensor_name = "DS18B20";
 }
 
 void DS18B20::begin()
 {
-    sensors.begin();
+    dallas_obj.begin();
 }
 
-void DS18B20::sensorRead()
+void DS18B20::update()
 {
-    sensors.requestTemperatures(); // Send the command to get temperatures
-    temper = sensors.getTempCByIndex(0);
 }
 
-void DS18B20::sensorPrint()
+void DS18B20::read_values()
 {
-    Serial.print("DS18B20 temper  ");
-    Serial.println(temper);
+    dallas_obj.requestTemperatures(); // Send the command to get temperatures
+    temperature_value = dallas_obj.getTempCByIndex(0);
+}
+
+void DS18B20::print_info(Print * pr)
+{
+    pr->print(sensor_name);
+    pr->println(" :");
+    pr->print("  temperature ");
+    pr->print(temperature_value);
+    pr->println();
 }

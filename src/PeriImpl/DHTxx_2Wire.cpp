@@ -2,18 +2,18 @@
 
 
 DHTxx_2Wire::DHTxx_2Wire(uint8_t pin, uint8_t type)
-    : dht_xx(pin, type)
+    : dhtxx_obj(pin, type)
 {
     switch (type)
     {
     case 11:
-        type_str = "DHT11";
+        sensor_name = "DHT11";
         break;
     case 21:
-        type_str = "DHT21";
+        sensor_name = "DHT21";
         break;
     case 22:
-        type_str = "DHT22";
+        sensor_name = "DHT22";
         break;
     }
 }
@@ -26,17 +26,32 @@ DHTxx_2Wire::~DHTxx_2Wire()
 
 void DHTxx_2Wire::begin()
 {
-    dht_xx.begin();
+    dhtxx_obj.begin();
 }
 
-void DHTxx_2Wire::sensorRead()
+
+void DHTxx_2Wire::update()
 {
-    temper_dht = dht_xx.readTemperature();
-    humid_dht = dht_xx.readHumidity();
 }
 
-void DHTxx_2Wire::sensorPrint()
+void DHTxx_2Wire::read_values()
 {
-    Serial.printf("DHTxx_2Wire  temper_dht  : %f  \n", temper_dht);
-    Serial.printf("DHTxx_2Wire  humid_dht  : %f  \n", humid_dht);
+    temperature_value = dhtxx_obj.readTemperature();
+    humidity_value = dhtxx_obj.readHumidity();
+}
+
+void DHTxx_2Wire::print_info(Print * pr)
+{
+
+
+    pr->print(sensor_name);
+    pr->println(" :");
+    pr->print("  temperature ");
+    pr->print(temperature_value);
+    pr->println();
+    pr->print("  humidity ");
+    pr->print(humidity_value);
+    pr->println();
+
+
 }

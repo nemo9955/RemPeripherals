@@ -1,16 +1,18 @@
 #ifndef IR_Recv_Switch_HPP_
 #define IR_Recv_Switch_HPP_
 
-#include "Actuator.h"
-#include "Switcher.h"
+#include "Actuator.hpp"
+#include "Switcher.hpp"
+#include "Updater.hpp"
 
 #include <IRremoteESP8266.h>
 #include <IRrecv.h>
 #include <IRutils.h>
+#include "RemPrinter.hpp"
 
-typedef void (*IR_RECV_FunctionCb)(decode_results *results);
+typedef void (*IR_RECV_FunctionCb)(decode_results *decode_results_obj);
 
-class IR_Recv_Switch : public Switcher
+class IR_Recv_Switch : public Switcher, public Updater
 {
   public:
     IR_Recv_Switch(uint16_t recvpin,
@@ -19,23 +21,21 @@ class IR_Recv_Switch : public Switcher
                    bool save_buffer = false);
     ~IR_Recv_Switch();
 
-    void update();
     void begin();
+    void update();
     void callListeners();
 
     void attachFunction(IR_RECV_FunctionCb sfcb);
     void attachActuator(Actuator *);
-    Actuator *getActuator(){ return THE_ACTUATOR; };
+    Actuator *getActuator() { return actuator_obj; };
 
   private:
-    const uint8_t PIN_BUTTON;
-    IRrecv irrecv;
-    decode_results results;
-    Actuator *THE_ACTUATOR;
+    const uint8_t device_pin;
+    IRrecv irrecv_obj;
+    decode_results decode_results_obj;
+    Actuator *actuator_obj;
     IR_RECV_FunctionCb func_cb;
-const uint16_t kCaptureBufferSize = 1024;
-
-
+    const uint16_t kCaptureBufferSize = 1024;
 };
 
 #endif /* !IR_Recv_Switch_HPP_ */

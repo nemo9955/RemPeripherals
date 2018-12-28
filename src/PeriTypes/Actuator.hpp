@@ -2,7 +2,6 @@
 #define ACTUATOR_H
 
 #include <stdint.h>
-// #include "CONSTANTS.h"
 
 class Actuator {
    public:

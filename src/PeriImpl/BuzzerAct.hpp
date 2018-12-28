@@ -2,22 +2,24 @@
 #define BuzzerAct_H
 
 #include <Arduino.h>
-#include "Actuator.h"
+#include "Actuator.hpp"
+#include "Updater.hpp"
+#include "RemPrinter.hpp"
 
-// abstract class BuzzerAct
-class BuzzerAct : public Actuator
+class BuzzerAct : public Actuator, public Updater, public RemPrinter
 {
   public:
     BuzzerAct(uint8_t pin_);
 
     void begin();
+    void update();
     bool setState(uint32_t);
     void buzz(uint32_t);
-    const uint32_t getState() const { return act_state; }
+    const uint32_t getState() const { return actor_state; }
 
   private:
-    const uint8_t BuzzerAct_PIN;
-    uint32_t act_state ;
+    const uint8_t device_pin;
+    uint32_t actor_state ;
     int freq[8];
     String note[8];
 };

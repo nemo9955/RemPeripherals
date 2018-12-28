@@ -1,7 +1,7 @@
 #ifndef DHTXX_I2C_HPP_
 #define DHTXX_I2C_HPP_
 
-#include "Sensor.h"
+#include "Sensor.hpp"
 
 #if ARDUINO >= 100
 #include "Arduino.h"
@@ -10,31 +10,33 @@
 #endif
 
 #include "Wire.h"
+#include "Updater.hpp"
+#include "RemPrinter.hpp"
 
-class DHTxx_I2C : public Sensor
+class DHTxx_I2C : public Sensor, public Updater, public RemPrinter
 {
   public:
     DHTxx_I2C(int address = 0x5c, uint8_t type = 11);
     ~DHTxx_I2C();
 
     void begin();
-    void sensorRead();
-    void sensorPrint();
+    void update();
+    void read_values();
+    void print_info(Print * pr);
 
     char *getPerName() const
     {
-        return type_str;
+        return sensor_name;
     };
 
   private:
-    int _address;
+    int device_address;
     unsigned int data[5];
 
-    char *type_str;
+    char *sensor_name;
 
-    float _fTemp;
-    float _cTemp;
-    float _humidity;
+    float temperature_value;
+    float humidity_value;
 };
 
 #endif /* !DHTXX_I2C_HPP_ */

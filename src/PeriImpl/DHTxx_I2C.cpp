@@ -1,17 +1,17 @@
 #include "DHTxx_I2C.hpp"
 
-DHTxx_I2C::DHTxx_I2C(int address, uint8_t type) : _address(address)
+DHTxx_I2C::DHTxx_I2C(int address, uint8_t type) : device_address(address)
 {
     switch (type)
     {
     case 11:
-        type_str = "DHT11";
+        sensor_name = "DHT11";
         break;
     case 21:
-        type_str = "DHT21";
+        sensor_name = "DHT21";
         break;
     case 22:
-        type_str = "DHT22";
+        sensor_name = "DHT22";
         break;
     }
 }
@@ -24,34 +24,23 @@ void DHTxx_I2C::begin()
 {
     // dht12.begin();
     Wire.begin();
-    sensorRead();
+    read_values();
 }
 
-void DHTxx_I2C::sensorPrint()
+void DHTxx_I2C::update()
 {
-
-    Serial.print("Temperature in Celsius : ");
-    Serial.println(_cTemp);
-
-    // Serial.print("Temperature in Fahrenheit : ");
-    // Serial.println(_fTemp);
-
-    Serial.print("Relative Humidity : ");
-    Serial.println(_humidity);
-
-    Serial.println();
 }
 
-void DHTxx_I2C::sensorRead()
+void DHTxx_I2C::read_values()
 {
-    Wire.beginTransmission(_address);
+    Wire.beginTransmission(device_address);
 
     Wire.write(0);
 
     if (Wire.endTransmission() != 0)
         return ;
 
-    Wire.requestFrom(_address, 5);
+    Wire.requestFrom(device_address, 5);
 
     for (int i = 0; i < 5; i++)
     {
@@ -69,9 +58,23 @@ void DHTxx_I2C::sensorRead()
     else
     {
         // Convert the data
-        _cTemp = (data[2] + (float)data[3] / 10);
-        _fTemp = (_cTemp * 1.8) + 32;
-        _humidity = (data[0] + (float)data[1] / 10);
+        temperature_value = (data[2] + (float)data[3] / 10);
+        humidity_value = (data[0] + (float)data[1] / 10);
         return ;
     }
+}
+
+
+void DHTxx_I2C::print_info(Print * pr)
+{
+
+    pr->print(sensor_name);
+    pr->println(" :");
+    pr->print("  temperature ");
+    pr->print(temperature_value);
+    pr->println();
+    pr->print("  humidity ");
+    pr->print(humidity_value);
+    pr->println();
+
 }

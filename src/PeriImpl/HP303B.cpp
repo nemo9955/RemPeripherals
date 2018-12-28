@@ -2,7 +2,7 @@
 
 HP303B::HP303B()
 {
-    type_str = "HP303B";
+    sensor_name = "HP303B";
     oversampling = 2;
 }
 
@@ -15,19 +15,24 @@ void HP303B::begin()
     HP303BPressureSensor.begin();
 }
 
-void HP303B::sensorRead()
+void HP303B::update()
 {
-    HP303BPressureSensor.measureTempOnce(temperature, oversampling);
-    HP303BPressureSensor.measurePressureOnce(pressure, oversampling);
 }
-void HP303B::sensorPrint()
+
+void HP303B::read_values()
+{
+    HP303BPressureSensor.measureTempOnce(temperature_value, oversampling);
+    HP303BPressureSensor.measurePressureOnce(pressure_value, oversampling);
+}
+void HP303B::print_info(Print * pr)
 {
 
-    Serial.print("Temperature: ");
-    Serial.print(temperature);
-    Serial.println(" degrees of Celsius");
-
-    Serial.print("Pressure: ");
-    Serial.print(pressure);
-    Serial.println(" Pascal");
+    pr->print(sensor_name);
+    pr->println(" :");
+    pr->print("  temperature ");
+    pr->print(temperature_value);
+    pr->println();
+    pr->print("  pressure ");
+    pr->print(pressure_value);
+    pr->println();
 }

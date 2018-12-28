@@ -4,9 +4,9 @@
 
 ESP_Internals::ESP_Internals()
 {
-    rssi = 0;
-    freeHeap = 0;
-    type_str = "HP303B";
+    current_rssi_value = 0;
+    free_heap_value = 0;
+    sensor_name = "HP303B";
 }
 
 ESP_Internals::~ESP_Internals()
@@ -17,19 +17,25 @@ void ESP_Internals::begin()
 {
 }
 
-void ESP_Internals::sensorRead()
+void ESP_Internals::update()
 {
-    rssi = WiFi.RSSI();
-
-    freeHeap = ESP.getFreeHeap();
 }
 
-void ESP_Internals::sensorPrint()
+void ESP_Internals::read_values()
 {
+    current_rssi_value = WiFi.RSSI();
 
-    Serial.print("rssi  ");
-    Serial.println(rssi);
+    free_heap_value = ESP.getFreeHeap();
+}
 
-    Serial.print("freeHeap  ");
-    Serial.println(freeHeap);
+void ESP_Internals::print_info(Print *pr)
+{
+    pr->print(sensor_name);
+    pr->println(" :");
+    pr->print("  current_rssi ");
+    pr->print(current_rssi_value);
+    pr->println();
+    pr->print("  free_heap ");
+    pr->print(free_heap_value);
+    pr->println();
 }
