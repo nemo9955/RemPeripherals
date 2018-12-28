@@ -1,5 +1,5 @@
-#ifndef Analog_sensor_H
-#define Analog_sensor_H
+#ifndef Analog_sensor_HPP
+#define Analog_sensor_HPP
 
 // #include <stdint.h>
 #include "Sensor.hpp"

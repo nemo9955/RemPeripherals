@@ -2,7 +2,7 @@
 
 BH1750_Rem::BH1750_Rem()
 {
-    sensor_name = "BH1750_Rem";
+    sensor_name = "BH1750";
 }
 
 BH1750_Rem::~BH1750_Rem()

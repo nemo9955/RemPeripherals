@@ -1,5 +1,5 @@
-#ifndef BuzzerAct_H
-#define BuzzerAct_H
+#ifndef BuzzerAct_HPP
+#define BuzzerAct_HPP
 
 #include <Arduino.h>
 #include "Actuator.hpp"
@@ -13,13 +13,13 @@ class BuzzerAct : public Actuator, public Updater, public RemPrinter
 
     void begin();
     void update();
-    bool setState(uint32_t);
+    bool setState(int);
     void buzz(uint32_t);
-    const uint32_t getState() const { return actor_state; }
+    const int getState() const { return actor_state; }
 
   private:
     const uint8_t device_pin;
-    uint32_t actor_state ;
+    int actor_state ;
     int freq[8];
     String note[8];
 };

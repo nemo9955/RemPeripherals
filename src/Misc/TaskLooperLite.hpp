@@ -1,13 +1,13 @@
-#ifndef TASKLOOPER_HPP_
-#define TASKLOOPER_HPP_
+#ifndef TaskLooperLite_HPP_
+#define TaskLooperLite_HPP_
 
 #include <stdint.h>
 
-class TaskLooper
+class TaskLooperLite
 {
   public:
-    TaskLooper();
-    ~TaskLooper();
+    TaskLooperLite();
+    ~TaskLooperLite();
 
     void begin();
     void set(uint16_t milis);
@@ -25,4 +25,4 @@ class TaskLooper
     uint16_t tl_interval;
 };
 
-#endif /* !TASKLOOPER_HPP_ */
+#endif /* !TaskLooperLite_HPP_ */

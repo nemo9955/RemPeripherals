@@ -1,5 +1,5 @@
-#ifndef DS18B20_H
-#define DS18B20_H
+#ifndef DS18B20_HPP
+#define DS18B20_HPP
 
 #include "Sensor.hpp"
 

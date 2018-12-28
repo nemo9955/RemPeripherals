@@ -1,7 +1,5 @@
-#ifndef SWITCHER_H
-#define SWITCHER_H
-
-#include <stdint.h>
+#ifndef SWITCHER_HPP
+#define SWITCHER_HPP
 
 class Switcher
 {

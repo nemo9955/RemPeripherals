@@ -1,4 +1,4 @@
-#include "TaskLooper.hpp"
+#include "TaskLooperLite.hpp"
 #include "Arduino.h"
 
 
@@ -6,21 +6,21 @@
 #define tli_norm (20 * 1000)
 #define tli_fast (10 * 1000)
 
-TaskLooper::TaskLooper()
+TaskLooperLite::TaskLooperLite()
 {
     stop();
 };
 
-void TaskLooper::begin()
+void TaskLooperLite::begin()
 {
     set_norm();
 };
 
-TaskLooper::~TaskLooper(){
+TaskLooperLite::~TaskLooperLite(){
 
 };
 
-bool TaskLooper::check()
+bool TaskLooperLite::check()
 {
     if (next_ts > 0 && millis() > next_ts)
     {
@@ -30,41 +30,41 @@ bool TaskLooper::check()
     return false;
 };
 
-void TaskLooper::start()
+void TaskLooperLite::start()
 {
     next_ts = millis() + tl_interval;
 };
 
-void TaskLooper::now()
+void TaskLooperLite::now()
 {
     next_ts = millis();
 };
 
-void TaskLooper::stop()
+void TaskLooperLite::stop()
 {
     next_ts = -1;
 };
 
-void TaskLooper::set(uint16_t milis)
+void TaskLooperLite::set(uint16_t milis)
 {
     tl_interval = milis;
     start();
 };
 
-void TaskLooper::set_slow()
+void TaskLooperLite::set_slow()
 {
     tl_interval = tli_slow;
     start();
 };
 
-void TaskLooper::set_norm()
+void TaskLooperLite::set_norm()
 {
 
     tl_interval = tli_norm;
     start();
 };
 
-void TaskLooper::set_fast()
+void TaskLooperLite::set_fast()
 {
     tl_interval = tli_fast;
     start();

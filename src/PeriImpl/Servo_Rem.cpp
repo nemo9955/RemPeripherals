@@ -16,7 +16,7 @@ void Servo_Rem::update()
 {
 }
 
-bool Servo_Rem::setState(uint32_t state)
+bool Servo_Rem::setState(int state)
 {
 
     actor_state = state;

@@ -6,7 +6,7 @@
 #include <Arduino.h>
 #include "Updater.hpp"
 
-typedef void (*CycleFunctionCb)(uint32_t state);
+typedef void (*CycleFunctionCb)(int state);
 
 class CycleSwitch : public Switcher, public Updater
 {
@@ -24,7 +24,7 @@ class CycleSwitch : public Switcher, public Updater
     Actuator *getActuator() { return actuator_obj; };
 
   private:
-    uint16_t switch_state;
+    int actor_state;
     const uint32_t cycle_size;
     const uint16_t cycle_step;
     const uint16_t TOG_SWITCH_MIN_DURATION;

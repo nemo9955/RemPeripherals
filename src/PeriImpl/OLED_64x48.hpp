@@ -1,12 +1,9 @@
-#ifndef OLED_64x48_H
-#define OLED_64x48_H
+#ifndef OLED_64x48_HPP
+#define OLED_64x48_HPP
 
 #include "Actuator.hpp"
 #include "Updater.hpp"
 #include "RemPrinter.hpp"
-
-// #include <Wire.h>  // Include Wire if you're using I2C
-// #include <SFE_MicroOLED.h>  // Include the SFE_MicroOLED library
 
 #include <Wire.h>
 #include <Adafruit_GFX.h>
@@ -24,16 +21,15 @@ class OLED_64x48 : public Actuator, public Updater
     {
         screen_obj = _screen_obj;
     };
-    bool setState(uint32_t){};
-    const uint32_t getState() const { return actor_state; }
+    bool setState(int){};
+    const int getState() const { return actor_state; }
 
   public:
-    Adafruit_SSD1306 oled_obj;
-    // MicroOLED oled_obj;
+    Adafruit_SSD1306 display_obj;
 
   private:
     RemPrinter *screen_obj;
-    uint32_t actor_state;
+    int actor_state;
     const uint8_t device_pin;
 };
 #endif

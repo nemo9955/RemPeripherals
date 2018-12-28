@@ -23,7 +23,7 @@ void BuzzerAct::update()
 {
 }
 
-bool BuzzerAct::setState(uint32_t state)
+bool BuzzerAct::setState(int state)
 {
     actor_state = state;
     buzz(state);

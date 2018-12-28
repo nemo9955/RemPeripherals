@@ -11,7 +11,7 @@ CycleSwitch::CycleSwitch(uint8_t pb, uint32_t cycle, uint16_t step, uint16_t wai
 {
     cb_index = used_cbs++;
     list_obj[cb_index] = this;
-    switch_state = 0;
+    actor_state = 0;
 }
 
 CycleSwitch::~CycleSwitch()
@@ -77,11 +77,11 @@ void CycleSwitch::update()
 void CycleSwitch::advanceState()
 {
 
-    switch_state += cycle_step;
-    switch_state %= cycle_size;
-    // if (switch_state >= cycle_size)
-    //     switch_state = 0;
-    Serial.printf("CycleSwitch %u state : %u \n", cb_index, switch_state);
+    actor_state += cycle_step;
+    actor_state %= cycle_size;
+    // if (actor_state >= cycle_size)
+    //     actor_state = 0;
+    Serial.printf("CycleSwitch %u state : %u \n", cb_index, actor_state);
 
     callListeners();
 }
@@ -91,12 +91,12 @@ void CycleSwitch::callListeners()
 
     if (func_cb)
     {
-        func_cb(switch_state);
+        func_cb(actor_state);
     }
 
     if (actuator_obj)
     {
-        actuator_obj->setState(switch_state);
+        actuator_obj->setState(actor_state);
     }
 }
 

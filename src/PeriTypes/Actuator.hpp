@@ -1,5 +1,5 @@
-#ifndef ACTUATOR_H
-#define ACTUATOR_H
+#ifndef ACTUATOR_HPP
+#define ACTUATOR_HPP
 
 #include <stdint.h>
 
@@ -9,8 +9,8 @@ class Actuator {
     // virtual ~Actuator(){};
 
     virtual void begin() = 0;
-    virtual bool setState(uint32_t) = 0;
-    virtual const uint32_t getState() const = 0;
+    virtual bool setState(int) = 0;
+    virtual const int getState() const = 0;
 
     virtual ~Actuator(){};
 };
