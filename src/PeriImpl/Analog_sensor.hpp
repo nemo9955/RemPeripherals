@@ -5,6 +5,7 @@
 #include "Sensor.hpp"
 #include "RemPrinter.hpp"
 #include "Beginer.hpp"
+#include "SensorReading.hpp"
 
 class Analog_sensor : public Sensor, public RemPrinter, public Beginer
 {
@@ -16,9 +17,10 @@ class Analog_sensor : public Sensor, public RemPrinter, public Beginer
 
     void begin();
     int read_values();
-    int action_interval() { return 100; };
+    int reading_interval() { return 100; };
 
     void print_info(Print *pr);
+    SensorReading **get_readings() { return nullptr; };
 
   private:
     const uint8_t device_pin;

@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 #include "SimpleList.h"
+#include "SensorReading.hpp"
 
 class Sensor
 {
@@ -15,10 +16,12 @@ class Sensor
     virtual uint32_t get_peri_uuid() = 0;
     virtual const char *get_sensor_name() const = 0;
     virtual int read_values() = 0;
-    virtual int action_interval() = 0;
+    virtual int reading_interval() = 0;
 
-    virtual void reset_interval() { cooldown_time = millis() + action_interval(); };
-    virtual bool action_ready() { return millis() >= cooldown_time; };
+    virtual void reset_interval() { cooldown_time = millis() + reading_interval(); };
+    virtual bool ready_to_read() { return millis() >= cooldown_time; };
+
+    virtual SensorReading **get_readings() = 0;
 
     static SimpleList<Sensor *> sensorsList;
 

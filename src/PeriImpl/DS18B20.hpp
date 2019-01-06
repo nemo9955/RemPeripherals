@@ -7,6 +7,7 @@
 #include <OneWire.h>
 #include "RemPrinter.hpp"
 #include "Beginer.hpp"
+#include "SensorReading.hpp"
 
 class DS18B20 : public Sensor, public RemPrinter, public Beginer
 {
@@ -15,9 +16,11 @@ class DS18B20 : public Sensor, public RemPrinter, public Beginer
 
     void begin();
     int read_values();
-    int action_interval() { return 2000; };
+    int reading_interval() { return 2000; };
 
     void print_info(Print *pr);
+    SensorReading **get_readings() { return nullptr; };
+
 
     const char *get_sensor_name() const { return sensor_name; };
     uint32_t get_peri_uuid() { return reinterpret_cast<uint32_t>(sensor_name); };
@@ -27,6 +30,7 @@ class DS18B20 : public Sensor, public RemPrinter, public Beginer
     DallasTemperature dallas_obj;
     char *sensor_name;
     float temperature_value = 0;
+    // SensorReading *sensor_values[1];
 
     const uint8_t device_pin;
 };

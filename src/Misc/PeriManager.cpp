@@ -42,7 +42,7 @@ void PeriManager::update()
 
     for (Sensor *sens_ : Sensor::sensorsList)
     {
-        if (sens_->action_ready())
+        if (sens_->ready_to_read())
         {
             // Serial.printf("Reading sensor : %s\n", sens_->get_sensor_name());
             sens_->read_values();

@@ -8,6 +8,7 @@
 #include "RemPrinter.hpp"
 #include "Updater.hpp"
 #include "Beginer.hpp"
+#include "SensorReading.hpp"
 
 class Servo_Rem : public Actuator, public RemPrinter, public Updater, public Beginer
 {
@@ -16,7 +17,10 @@ class Servo_Rem : public Actuator, public RemPrinter, public Updater, public Beg
 
     void begin();
     void update();
+
     void print_info(Print *pr);
+    SensorReading **get_readings() { return nullptr; };
+
     bool setState(int);
     const int getState() const { return actor_state; }
 

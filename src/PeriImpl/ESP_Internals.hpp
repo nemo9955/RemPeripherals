@@ -4,6 +4,7 @@
 #include "Sensor.hpp"
 #include "RemPrinter.hpp"
 #include "Beginer.hpp"
+#include "SensorReading.hpp"
 
 class ESP_Internals : public Sensor, public RemPrinter, public Beginer
 {
@@ -13,9 +14,10 @@ class ESP_Internals : public Sensor, public RemPrinter, public Beginer
 
     void begin();
     int read_values();
-    int action_interval() { return 4000; };
+    int reading_interval() { return 4000; };
 
     void print_info(Print *pr);
+    SensorReading **get_readings() { return nullptr; };
 
     const char *get_sensor_name() const { return sensor_name; };
     uint32_t get_peri_uuid() { return reinterpret_cast<uint32_t>(sensor_name); };
