@@ -27,17 +27,16 @@ DHTxx_2Wire::~DHTxx_2Wire()
 void DHTxx_2Wire::begin()
 {
     dhtxx_obj.begin();
+    // Serial.println(" DHTxx_2Wire::begin()  ");
 }
 
 
-void DHTxx_2Wire::update()
-{
-}
-
-void DHTxx_2Wire::read_values()
+int DHTxx_2Wire::read_values()
 {
     temperature_value = dhtxx_obj.readTemperature();
     humidity_value = dhtxx_obj.readHumidity();
+    reset_interval();
+    return 0;
 }
 
 void DHTxx_2Wire::print_info(Print * pr)

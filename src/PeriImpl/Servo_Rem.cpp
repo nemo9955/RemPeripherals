@@ -12,10 +12,6 @@ void Servo_Rem::begin()
     servo_obj.attach(device_pin);
 }
 
-void Servo_Rem::update()
-{
-}
-
 bool Servo_Rem::setState(int state)
 {
 

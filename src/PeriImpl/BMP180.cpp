@@ -14,16 +14,15 @@ BMP180::~BMP180()
 void BMP180::begin()
 {
     bmp_obj.begin();
+    // Serial.println(" BMP180::begin()  ");
 }
 
-void BMP180::update()
-{
-}
-
-void BMP180::read_values()
+int BMP180::read_values()
 {
     pressure_value = bmp_obj.readPressure();
     temperature_value = bmp_obj.readTemperature();
+    reset_interval();
+    return 0;
 }
 
 void BMP180::print_info(Print *pr)

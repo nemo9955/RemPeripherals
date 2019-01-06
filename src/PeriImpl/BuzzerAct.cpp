@@ -19,10 +19,6 @@ void BuzzerAct::begin()
     Serial.printf("BuzzerAct BEGIN on pin : %u \n", device_pin);
 }
 
-void BuzzerAct::update()
-{
-}
-
 bool BuzzerAct::setState(int state)
 {
     actor_state = state;

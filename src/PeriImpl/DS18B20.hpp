@@ -5,20 +5,21 @@
 
 #include <DallasTemperature.h>
 #include <OneWire.h>
-#include "Updater.hpp"
 #include "RemPrinter.hpp"
+#include "Beginer.hpp"
 
-class DS18B20 : public Sensor, public Updater, public RemPrinter
+class DS18B20 : public Sensor,  public RemPrinter, public Beginer
 {
   public:
     DS18B20(uint8_t);
 
     void begin();
-    void update();
-    void read_values();
+    int read_values();
+    int action_interval() { return 2000; };
+
     void print_info(Print * pr);
 
-    char *getPerName() const { return sensor_name; };
+    const char *get_sensor_name() const { return sensor_name; };
 
   private:
     OneWire onewire_obj;

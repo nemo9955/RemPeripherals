@@ -8,8 +8,9 @@
 #include <Wire.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
+#include "Beginer.hpp"
 
-class OLED_64x48 : public Actuator, public Updater
+class OLED_64x48 : public Actuator, public Updater, public Beginer
 {
   public:
     OLED_64x48(uint8_t pin_ = 0x3C);

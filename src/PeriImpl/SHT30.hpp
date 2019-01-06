@@ -2,21 +2,22 @@
 #define SHT30_HPP_
 
 #include "Sensor.hpp"
-#include "Updater.hpp"
 #include "RemPrinter.hpp"
+#include "Beginer.hpp"
 
-class SHT30 : public Sensor, public Updater, public RemPrinter
+class SHT30 : public Sensor, public RemPrinter, public Beginer
 {
   public:
     SHT30(int _add = 0x45);
     ~SHT30();
 
     void begin();
-    void update();
-    void read_values();
-    void print_info(Print * pr);
+    int read_values();
+    int action_interval() { return 1000; };
 
-    char *getPerName() const { return sensor_name; };
+    void print_info(Print *pr);
+
+    const char *get_sensor_name() const { return sensor_name; };
 
   private:
     char *sensor_name;

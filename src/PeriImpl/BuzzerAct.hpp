@@ -3,16 +3,15 @@
 
 #include <Arduino.h>
 #include "Actuator.hpp"
-#include "Updater.hpp"
 #include "RemPrinter.hpp"
+#include "Beginer.hpp"
 
-class BuzzerAct : public Actuator, public Updater, public RemPrinter
+class BuzzerAct : public Actuator, public RemPrinter, public Beginer
 {
   public:
     BuzzerAct(uint8_t pin_);
 
     void begin();
-    void update();
     bool setState(int);
     void buzz(uint32_t);
     const int getState() const { return actor_state; }

@@ -5,10 +5,11 @@
 #include "Switcher.hpp"
 #include <Arduino.h>
 #include "Updater.hpp"
+#include "Beginer.hpp"
 
 typedef void (*CycleFunctionCb)(int state);
 
-class CycleSwitch : public Switcher, public Updater
+class CycleSwitch : public Switcher, public Updater, public Beginer
 {
   public:
     CycleSwitch(uint8_t pb, uint32_t cycle = 2, uint16_t step = 1, uint16_t wait_change = 2000);

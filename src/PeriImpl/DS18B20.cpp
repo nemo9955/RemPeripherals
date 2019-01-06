@@ -10,16 +10,15 @@ DS18B20::DS18B20(uint8_t pin)
 void DS18B20::begin()
 {
     dallas_obj.begin();
+    // Serial.println(" DS18B20::begin()  ");
 }
 
-void DS18B20::update()
-{
-}
-
-void DS18B20::read_values()
+int DS18B20::read_values()
 {
     dallas_obj.requestTemperatures(); // Send the command to get temperatures
     temperature_value = dallas_obj.getTempCByIndex(0);
+    reset_interval();
+    return 0;
 }
 
 void DS18B20::print_info(Print * pr)

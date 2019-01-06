@@ -3,15 +3,19 @@
 
 #include <Print.h>
 #include <stdint.h>
+#include "SimpleList.h"
 
 class RemPrinter
 {
   public:
-    // RemPrinter();
-    // ~RemPrinter();
+    RemPrinter()
+    {
+        remprintersList.push_back(this);
+    };
 
+    virtual void print_info(Print *pr) = 0;
 
-    virtual void print_info(Print * pr) = 0;
+    static SimpleList<RemPrinter *> remprintersList;
 
   protected:
   private:

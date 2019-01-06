@@ -2,21 +2,22 @@
 #define ESP_INTERNALS_HPP_
 
 #include "Sensor.hpp"
-#include "Updater.hpp"
 #include "RemPrinter.hpp"
+#include "Beginer.hpp"
 
-class ESP_Internals : public Sensor, public Updater, public RemPrinter
+class ESP_Internals : public Sensor,  public RemPrinter, public Beginer
 {
   public:
     ESP_Internals();
     ~ESP_Internals();
 
     void begin();
-    void update();
-    void read_values();
+    int read_values();
+    int action_interval() { return 4000; };
+
     void print_info(Print * pr);
 
-    char *getPerName() const { return sensor_name; };
+    const char *get_sensor_name() const { return sensor_name; };
 
   private:
     char *sensor_name;

@@ -17,11 +17,7 @@ void SHT30::begin()
     Wire.begin();
 }
 
-void SHT30::update()
-{
-}
-
-void SHT30::read_values()
+int SHT30::read_values()
 {
 
     // Start I2C Transmission
@@ -31,7 +27,7 @@ void SHT30::read_values()
     Wire.write(0x06);
     // Stop I2C transmission
     if (Wire.endTransmission() != 0)
-        return;
+        return 1;
 
     delay(500);
 
@@ -48,10 +44,12 @@ void SHT30::read_values()
     delay(50);
 
     if (Wire.available() != 0)
-        return;
+        return 1;
 
     temperature_value = ((((data[0] * 256.0) + data[1]) * 175) / 65535.0) - 45;
     humidity_value = ((((data[3] * 256.0) + data[4]) * 100) / 65535.0);
+    reset_interval();
+    return 0;
 }
 
 void SHT30::print_info(Print *pr)

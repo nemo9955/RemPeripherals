@@ -14,16 +14,14 @@ Analog_sensor::Analog_sensor(uint8_t pin_, char *sensName, char *readName,
     sens_value = 0;
 }
 
-void Analog_sensor::read_values()
+int Analog_sensor::read_values()
 {
     sens_value = map(analogRead(device_pin), 0, 1023, min_map, max_map);
+    reset_interval();
+    return 0;
 }
 
 void Analog_sensor::begin()
-{
-}
-
-void Analog_sensor::update()
 {
 }
 

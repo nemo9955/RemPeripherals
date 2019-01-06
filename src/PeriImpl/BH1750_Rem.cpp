@@ -14,15 +14,13 @@ void BH1750_Rem::begin()
     lightMeter.begin();
 }
 
-void BH1750_Rem::update()
-{
-}
-
-void BH1750_Rem::read_values()
+int BH1750_Rem::read_values()
 {
     ambient_light_value = lightMeter.readLightLevel();
-}
 
+    reset_interval();
+    return 0;
+}
 
 void BH1750_Rem::print_info(Print *pr)
 {

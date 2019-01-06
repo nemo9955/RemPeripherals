@@ -9,10 +9,11 @@
 #include <IRrecv.h>
 #include <IRutils.h>
 #include "RemPrinter.hpp"
+#include "Beginer.hpp"
 
 typedef void (*IR_RECV_FunctionCb)(decode_results *decode_results_obj);
 
-class IR_Recv_Switch : public Switcher, public Updater
+class IR_Recv_Switch : public Switcher, public Updater, public Beginer
 {
   public:
     IR_Recv_Switch(uint16_t recvpin,

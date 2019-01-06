@@ -27,18 +27,14 @@ void DHTxx_I2C::begin()
     read_values();
 }
 
-void DHTxx_I2C::update()
-{
-}
-
-void DHTxx_I2C::read_values()
+int DHTxx_I2C::read_values()
 {
     Wire.beginTransmission(device_address);
 
     Wire.write(0);
 
     if (Wire.endTransmission() != 0)
-        return ;
+        return 1;
 
     Wire.requestFrom(device_address, 5);
 
@@ -50,22 +46,19 @@ void DHTxx_I2C::read_values()
     delay(50);
 
     if (Wire.available() != 0)
-        return ;
+        return 1;
 
     if (data[4] != (data[0] + data[1] + data[2] + data[3]))
-        return ;
+        return 1;
 
-    else
-    {
-        // Convert the data
-        temperature_value = (data[2] + (float)data[3] / 10);
-        humidity_value = (data[0] + (float)data[1] / 10);
-        return ;
-    }
+    // Convert the data
+    temperature_value = (data[2] + (float)data[3] / 10);
+    humidity_value = (data[0] + (float)data[1] / 10);
+    reset_interval();
+    return 0;
 }
 
-
-void DHTxx_I2C::print_info(Print * pr)
+void DHTxx_I2C::print_info(Print *pr)
 {
 
     pr->print(sensor_name);
@@ -76,5 +69,4 @@ void DHTxx_I2C::print_info(Print * pr)
     pr->print("  humidity ");
     pr->print(humidity_value);
     pr->println();
-
 }

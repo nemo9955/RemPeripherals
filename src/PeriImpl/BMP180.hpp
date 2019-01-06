@@ -3,21 +3,22 @@
 
 #include "Adafruit_BMP085.h"
 #include "Sensor.hpp"
-#include "Updater.hpp"
 #include "RemPrinter.hpp"
+#include "Beginer.hpp"
 
-class BMP180 : public Sensor, public Updater, public RemPrinter
+class BMP180 : public Sensor, public RemPrinter, public Beginer
 {
   public:
     BMP180();
     ~BMP180();
 
     void begin();
-    void update();
-    void read_values();
+    int read_values();
+    int action_interval() { return 5000; };
+
     void print_info(Print * pr);
 
-    char *getPerName() const { return sensor_name; };
+    const char *get_sensor_name() const { return sensor_name; };
 
   private:
     char *sensor_name;

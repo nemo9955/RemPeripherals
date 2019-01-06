@@ -10,10 +10,11 @@
 #include <XPT2046_Touchscreen.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_ILI9341.h>
+#include "Beginer.hpp"
 
 class TFT_24_ts_ScreenButton;
 
-class TFT_24_ts : public Updater
+class TFT_24_ts : public Updater, public Beginer
 {
   public:
     TFT_24_ts(uint8_t _TFT_CS = D0, uint8_t _TFT_DC = D8, uint8_t _TFT_RST = -1, uint8_t _TS_CS = D3);

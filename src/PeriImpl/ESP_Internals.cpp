@@ -17,15 +17,13 @@ void ESP_Internals::begin()
 {
 }
 
-void ESP_Internals::update()
-{
-}
-
-void ESP_Internals::read_values()
+int ESP_Internals::read_values()
 {
     current_rssi_value = WiFi.RSSI();
 
     free_heap_value = ESP.getFreeHeap();
+    reset_interval();
+    return 0;
 }
 
 void ESP_Internals::print_info(Print *pr)

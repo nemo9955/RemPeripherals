@@ -3,10 +3,10 @@
 
 // #include <stdint.h>
 #include "Sensor.hpp"
-#include "Updater.hpp"
 #include "RemPrinter.hpp"
+#include "Beginer.hpp"
 
-class Analog_sensor : public Sensor, public Updater, public RemPrinter
+class Analog_sensor : public Sensor, public RemPrinter, public Beginer
 {
   public:
     Analog_sensor(uint8_t pin_, char *sensName, char *readName,
@@ -15,9 +15,10 @@ class Analog_sensor : public Sensor, public Updater, public RemPrinter
     ~Analog_sensor();
 
     void begin();
-    void update();
-    void read_values();
-    void print_info(Print * pr);
+    int read_values();
+    int action_interval() { return 100; };
+
+    void print_info(Print *pr);
 
   private:
     const uint8_t device_pin;

@@ -10,21 +10,22 @@
 #endif
 
 #include "Wire.h"
-#include "Updater.hpp"
 #include "RemPrinter.hpp"
+#include "Beginer.hpp"
 
-class DHTxx_I2C : public Sensor, public Updater, public RemPrinter
+class DHTxx_I2C : public Sensor, public RemPrinter, public Beginer
 {
   public:
     DHTxx_I2C(int address = 0x5c, uint8_t type = 11);
     ~DHTxx_I2C();
 
     void begin();
-    void update();
-    void read_values();
+    int read_values();
+    int action_interval() { return 3000; };
+
     void print_info(Print * pr);
 
-    char *getPerName() const
+    const char *get_sensor_name() const
     {
         return sensor_name;
     };

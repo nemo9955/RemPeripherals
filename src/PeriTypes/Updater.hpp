@@ -2,15 +2,19 @@
 #define UPDATER_HPP_
 
 #include <stdint.h>
+#include "SimpleList.h"
 
 class Updater
 {
   public:
-    // Updater();
-    // ~Updater();
+    Updater()
+    {
+        updatersList.push_back(this);
+    };
 
-    virtual void begin() = 0;
     virtual void update() = 0;
+
+    static SimpleList<Updater *> updatersList;
 
   protected:
   private:

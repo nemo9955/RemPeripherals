@@ -3,21 +3,22 @@
 
 #include "DHT.h"
 #include "Sensor.hpp"
-#include "Updater.hpp"
 #include "RemPrinter.hpp"
+#include "Beginer.hpp"
 
-class DHTxx_2Wire : public Sensor, public Updater, public RemPrinter
+class DHTxx_2Wire : public Sensor, public RemPrinter, public Beginer
 {
   public:
     DHTxx_2Wire(uint8_t, uint8_t);
     ~DHTxx_2Wire();
 
     void begin();
-    void update();
-    void read_values();
+    int read_values();
+    int action_interval() { return 3000; };
+
     void print_info(Print * pr);
 
-    char *getPerName() const
+    const char *get_sensor_name() const
     {
         return sensor_name;
     };

@@ -22,8 +22,11 @@
 // #include "OLED_64x48.hpp"
 
 #include "CycleSwitch.hpp"
+#include "PeriManager.hpp"
 
 // examples/Combined_I2C/Combined_I2C.ino
+
+PeriManager manager;
 
 TaskLooperLite read_vals;
 
@@ -82,10 +85,12 @@ void setup()
 
     read_vals.set(2000);
 
-    for (Updater *upd : updaters)
-    {
-        upd->begin();
-    }
+    manager.begin();
+
+    // for (Updater *upd : updaters)
+    // {
+    //     upd->begin();
+    // }
 
     btn.attachFunction(&increase_screen);
     ts_b_inc.attachFunction(&touch_screen_buttons);
