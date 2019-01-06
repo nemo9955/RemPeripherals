@@ -12,7 +12,8 @@ class PeriManager
     void begin();
     void update();
 
-    void print_info(Print *pr);
+    void print_info_all(Print *pr);
+    void print_info_uuid(uint32_t per_uuid, Print *pr);
 
   protected:
   private:

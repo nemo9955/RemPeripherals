@@ -2,7 +2,8 @@
 
 DS18B20::DS18B20(uint8_t pin)
     : onewire_obj(pin),
-      dallas_obj(&onewire_obj)
+      dallas_obj(&onewire_obj),
+      device_pin(pin)
 {
     sensor_name = "DS18B20";
 }
@@ -21,7 +22,7 @@ int DS18B20::read_values()
     return 0;
 }
 
-void DS18B20::print_info(Print * pr)
+void DS18B20::print_info(Print *pr)
 {
     pr->print(sensor_name);
     pr->println(" :");

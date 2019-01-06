@@ -14,6 +14,7 @@ class RemPrinter
     };
 
     virtual void print_info(Print *pr) = 0;
+    virtual uint32_t get_peri_uuid() = 0;
 
     static SimpleList<RemPrinter *> remprintersList;
 

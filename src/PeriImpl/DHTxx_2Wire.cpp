@@ -1,8 +1,9 @@
 #include "DHTxx_2Wire.hpp"
 
-
 DHTxx_2Wire::DHTxx_2Wire(uint8_t pin, uint8_t type)
-    : dhtxx_obj(pin, type)
+    : dhtxx_obj(pin, type),
+      device_pin(pin),
+      device_type(type)
 {
     switch (type)
     {
@@ -18,18 +19,15 @@ DHTxx_2Wire::DHTxx_2Wire(uint8_t pin, uint8_t type)
     }
 }
 
-
 DHTxx_2Wire::~DHTxx_2Wire()
 {
 }
-
 
 void DHTxx_2Wire::begin()
 {
     dhtxx_obj.begin();
     // Serial.println(" DHTxx_2Wire::begin()  ");
 }
-
 
 int DHTxx_2Wire::read_values()
 {
@@ -39,9 +37,8 @@ int DHTxx_2Wire::read_values()
     return 0;
 }
 
-void DHTxx_2Wire::print_info(Print * pr)
+void DHTxx_2Wire::print_info(Print *pr)
 {
-
 
     pr->print(sensor_name);
     pr->println(" :");
@@ -51,6 +48,4 @@ void DHTxx_2Wire::print_info(Print * pr)
     pr->print("  humidity ");
     pr->print(humidity_value);
     pr->println();
-
-
 }

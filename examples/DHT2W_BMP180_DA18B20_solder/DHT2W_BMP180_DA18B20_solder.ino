@@ -53,11 +53,11 @@ void loop()
 
     manager.update();
 
-    if (print_vals.check())
-    {
-        Serial.println();
-        manager.print_info(&Serial);
-    }
+    // if (print_vals.check())
+    // {
+    //     Serial.println();
+    //     manager.print_info_all(&Serial);
+    // }
 
     // dhtxx_2wire.read_values();
     // dhtxx_2wire.print_info(&Serial);

@@ -1,6 +1,8 @@
 #include "DHTxx_I2C.hpp"
 
-DHTxx_I2C::DHTxx_I2C(int address, uint8_t type) : device_address(address)
+DHTxx_I2C::DHTxx_I2C(int address, uint8_t type)
+    : device_address(address),
+     device_type(type)
 {
     switch (type)
     {

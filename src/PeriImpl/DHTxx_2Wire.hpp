@@ -16,15 +16,14 @@ class DHTxx_2Wire : public Sensor, public RemPrinter, public Beginer
     int read_values();
     int action_interval() { return 3000; };
 
-    void print_info(Print * pr);
+    void print_info(Print *pr);
 
-    const char *get_sensor_name() const
-    {
-        return sensor_name;
-    };
+    const char *get_sensor_name() const { return sensor_name; };
+    uint32_t get_peri_uuid() { return reinterpret_cast<uint32_t>(sensor_name) + device_pin + device_type; };
 
   private:
     DHT dhtxx_obj;
+    const uint8_t device_pin, device_type;
     char *sensor_name;
     float temperature_value = 0;
     float humidity_value = 0;

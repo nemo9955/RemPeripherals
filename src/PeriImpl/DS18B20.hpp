@@ -8,7 +8,7 @@
 #include "RemPrinter.hpp"
 #include "Beginer.hpp"
 
-class DS18B20 : public Sensor,  public RemPrinter, public Beginer
+class DS18B20 : public Sensor, public RemPrinter, public Beginer
 {
   public:
     DS18B20(uint8_t);
@@ -17,14 +17,17 @@ class DS18B20 : public Sensor,  public RemPrinter, public Beginer
     int read_values();
     int action_interval() { return 2000; };
 
-    void print_info(Print * pr);
+    void print_info(Print *pr);
 
     const char *get_sensor_name() const { return sensor_name; };
+    uint32_t get_peri_uuid() { return reinterpret_cast<uint32_t>(sensor_name); };
 
   private:
     OneWire onewire_obj;
     DallasTemperature dallas_obj;
     char *sensor_name;
     float temperature_value = 0;
+
+    const uint8_t device_pin;
 };
 #endif

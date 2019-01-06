@@ -18,6 +18,9 @@
         "initializer_list": "cpp",
         "*.ini": "cpp",
         "*.cfg": "cpp",
-        "*.gitmodules": "cpp"
+        "*.gitmodules": "cpp",
+        "chrono": "cpp",
+        "ratio": "cpp",
+        "type_traits": "cpp"
     }
 }

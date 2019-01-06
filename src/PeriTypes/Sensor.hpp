@@ -12,6 +12,7 @@ class Sensor
         sensorsList.push_back(this);
     };
 
+    virtual uint32_t get_peri_uuid() = 0;
     virtual const char *get_sensor_name() const = 0;
     virtual int read_values() = 0;
     virtual int action_interval() = 0;
